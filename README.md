@@ -75,7 +75,7 @@ Esse é um desafio da Coodesh `#challenge by coodesh`
 
 # Rodar a API (backend) local
 
-Caso você não queira usar a api que deixei hospedada na Vercel, poderá baixar o projeto dela aqui no meu git, [nesse link](https://www.linkedin.com/in/julio-cesar-filho-759653171/). Após baixar só entrar na pasta `dictionary_api` e rodar o `yarn`, feito isso, rode o `yarn dev` em ambos projetos e no `dictionary_web` deixe a váriavel `API_JSON_SERVER` vazia. E teste a aplicação.
+Caso você não queira usar a api que deixei hospedada na Vercel, poderá baixar o projeto dela aqui no meu git, [nesse link](https://github.com/JulioCesar012/dictionary_api). Após baixar só entrar na pasta `dictionary_api` e rodar o `yarn`, feito isso, rode o `yarn dev` em ambos projetos e no `dictionary_web` deixe a váriavel `API_JSON_SERVER` vazia. E teste a aplicação.
 
 
 :telephone_receiver: Qualquer dúvida estou a disposição.
