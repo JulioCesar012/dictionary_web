@@ -14,13 +14,13 @@ export default {
     }
 
     @media only screen and (max-width: 576px) {
-      display: ${({ visibleTables }) => (visibleTables ? "none" : "block")} !important;
       &:first-child {
         margin-top: 0 !important;
       }
     }
 
     @media only screen and (max-width: 768px) {
+      display: ${({ visibleTables }) => (visibleTables ? "none" : "block")};
       &:first-child {
         padding-right: 0;
         margin-top: -${space[5]}px;

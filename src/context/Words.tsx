@@ -24,7 +24,7 @@ export const WordsProvider: FC = ({ children }: Words) => {
   const [wordDefinition, setWordDefinition] = useState([]);
   const [phoneticWord, setPhoneticWord] = useState("");
   const [audioPhoneticsWord, setAudioPhoneticsWord] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [wordLabel, setWordLabel] = useState(null);
   const [type, setType] = useState("list");
