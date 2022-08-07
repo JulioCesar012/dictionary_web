@@ -14,7 +14,6 @@
     "json-server": "^0.17.0",
     "memory-cache": "^0.2.0",
     "next": "12.2.3",
-    "next-images": "^1.8.4",
     "next-pwa": "^5.5.5",
     "react": "18.2.0",
     "react-cache": "^2.0.0-alpha.1",
