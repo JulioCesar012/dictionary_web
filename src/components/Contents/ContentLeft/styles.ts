@@ -14,7 +14,7 @@ export default {
     }
 
     @media only screen and (max-width: 576px) {
-      display: ${({ visibleTables }) => (visibleTables ? "none" : "block")};
+      display: ${({ visibleTables }) => (visibleTables ? "none" : "block")} !important;
       &:first-child {
         margin-top: 0 !important;
       }

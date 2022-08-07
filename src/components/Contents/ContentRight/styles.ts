@@ -4,7 +4,7 @@ import { space } from "~/styles";
 export default {
   WordList: styled.div<any>`
     @media only screen and (max-width: 768px) {
-      display: ${({ visibleTables }) => (visibleTables ? "block" : "none")};
+      display: ${({ visibleTables }) => (visibleTables ? "block" : "none")} !important;
     }
   `,
   ActionsTable: styled.div`
