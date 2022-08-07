@@ -1,2 +1,4 @@
 export * from "./API";
-export * from "./free_dictionary";
+export * from "./WordsList";
+export * from "./WordsFavorite";
+export * from "./WordsHistory";

@@ -1,4 +1,5 @@
-[
+{
+  "word_list": [
     "a",
     "ability",
     "able",
@@ -2285,4 +2286,9 @@
     "young",
     "youth",
     "zero"
-]
+  ],
+  "word_history": [
+
+  ],
+  "words_favorite": []
+}

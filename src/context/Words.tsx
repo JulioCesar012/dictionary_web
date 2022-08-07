@@ -1,20 +1,44 @@
 import { FC, createContext, useContext, useState, useEffect } from "react";
-import { Alert } from "~/components";
-import { getWord, IWordsContext, wordList } from "~/utils";
+
+import {
+  deleteWordHistory,
+  getAllWords,
+  getWord,
+  getWordHistory,
+  IWordsContext,
+  postWordHistory,
+} from "~/utils";
+import { useLoading } from "./Loading";
+
+type Words = {
+  children: React.ReactNode;
+}
 
 export const WordsContext = createContext<IWordsContext>({} as IWordsContext);
 
-export const WordsProvider: FC = ({ children }) => {
+export const WordsProvider: FC = ({ children }: Words) => {
+  const { loading, setLoading } = useLoading();
+
   const [mounted, setMounted] = useState(false);
+  const [words, setWords] = useState([]);
+  const [wordHistory, setWordHistory] = useState([]);
+
   const [wordPosition, setWordPosition] = useState(0);
   const [wordDefinition, setWordDefinition] = useState([]);
   const [phoneticWord, setPhoneticWord] = useState("");
   const [audioPhoneticsWord, setAudioPhoneticsWord] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const [wordLabel, setWordLabel] = useState("");
+  const [wordLabel, setWordLabel] = useState(null);
   const [type, setType] = useState("list");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [visibleTables, setVisibleTables] = useState(false);
+  const [resizeScreen, setResizeScreen] = useState(
+    typeof window !== "undefined" && window.innerWidth <= 768 ? true : false
+  );
+
+  const allWordsHistory = wordHistory.map(item => item);
 
   const tabToggleType = (text) => {
     setLoading(true);
@@ -26,47 +50,108 @@ export const WordsProvider: FC = ({ children }) => {
     }
   };
 
+  const toggleTabMobile = () => {
+    setVisibleTables(!visibleTables ? true : false);
+  };
+
   const notHasLoading = (list) => {
-    if(!loading) {
+    if (!loading) {
       tabToggleType(list);
     }
-  }
+  };
+
+  const readAllWord = () => {
+    getAllWords(currentPage).then(({ data }) => {
+      setWords([...words, ...data]);
+    });
+  };
 
   const readWord = (label) => {
-    getWord(label).then(({ data }) => {
+    getWord(label)
+      .then(({ data }) => {
+        setLoading(false);
+        if (data) {
+          setWordDefinition(data[0].meanings[0].definitions[0].definition);
+          setPhoneticWord(data[0].phonetic);
+          setAudioPhoneticsWord(
+            data[0].phonetics.filter(
+              (item) => item.audio !== "" && item.audio !== null
+            )
+          );
+        }
+      })
+      .catch((error) => {
+        if (error.response.data) {
+          setError("Definição da palavra não encontrada!");
+          setLoading(false);
+        }
+      });
+  };
+
+  const createWordHistory = (word) => {
+      postWordHistory(word).then(({ data }) => {
+        setWordHistory([...wordHistory, data])
+      });
+  };
+
+  const readWordHistory = () => {
+    getWordHistory().then(({ data }) => {
+      setWordHistory(data);
       setLoading(false);
-      if(data) {
+    });
+  };
+
+  const viewWordHistory = (label) => {
+    setWordLabel(label);
+    setVisibleTables(false);
+    setPhoneticWord("");
+    getWord(label).then(({ data }) => {
+      if (data) {
         setWordDefinition(data[0].meanings[0].definitions[0].definition);
         setPhoneticWord(data[0].phonetic);
-        setAudioPhoneticsWord(data[0].phonetics.filter(item => item.audio !== "" && item.audio !== null));
+        setAudioPhoneticsWord(
+          data[0].phonetics.filter(
+            (item) => item.audio !== "" && item.audio !== null
+          )
+        );
       }
-    }).catch((error) => {
-      if(error.response.data) {
-        setError("Definição da palavra não encontrada!");
-        setLoading(false);
-      }
-    })
-  }
+    });
+  };
 
+  const removeWordHistory = (wordId) => {
+    deleteWordHistory(wordId).then((data) => {
+      setType("list");
+    });
+  };
 
   const goToNextWord = (label) => {
     setLoading(true);
     setWordPosition(wordPosition + 1);
     setWordLabel(label);
+
+    const checkExisting = allWordsHistory.find(item => item.word_history === label);
+
+    if (!checkExisting) {
+      createWordHistory(label);
+    }
     setError("");
-  }
+  };
 
   const goBackToPreviousWord = () => {
     setError("");
-    if(wordPosition === 0) {
+    if (wordPosition === 0) {
       setWordPosition(wordPosition);
       return;
     }
     setWordPosition(wordPosition - 1);
-  }
+  };
+
+  const checkSize = () => {
+    setResizeScreen(window.innerWidth <= 768 ? true : false);
+  };
 
   useEffect(() => {
-    if(type) {
+    if (type) {
       setTimeout(() => {
         setLoading(false);
       }, 250);
@@ -74,12 +159,12 @@ export const WordsProvider: FC = ({ children }) => {
   }, [type]);
 
   useEffect(() => {
-    if(wordLabel) {
+    if (wordPosition) {
       readWord(wordLabel);
     }
   }, [wordLabel]);
 
-  const searchIndexPosition = wordList.find(
+  const searchIndexPosition = words.find(
     (element, index) => index === wordPosition
   );
 
@@ -87,20 +172,35 @@ export const WordsProvider: FC = ({ children }) => {
     setWordLabel(searchIndexPosition);
     if (wordPosition <= 0) {
       getWord(searchIndexPosition).then(({ data }) => {
-        if(data) {
+        if (data) {
           setWordDefinition(data[0].meanings[0].definitions[0].definition);
           setPhoneticWord(data[0].phonetic);
-          setAudioPhoneticsWord(data[0].phonetics.filter(item => item.audio !== "" && item.audio !== null));
+          setAudioPhoneticsWord(
+            data[0].phonetics.filter(
+              (item) => item.audio !== "" && item.audio !== null
+            )
+          );
         }
       });
     }
-  }, [wordPosition, error]);
+  }, [wordPosition, words, error]);
 
-  useEffect(() => {}, [audioPhoneticsWord])
+  useEffect(() => {
+    if (currentPage) {
+      readAllWord();
+    }
+  }, [currentPage]);
+
+  useEffect(() => {}, [wordHistory]);
+
+  useEffect(() => {
+    window.addEventListener("resize", checkSize);
+  }, [resizeScreen]);
 
   const value = {
     tabToggleType,
     type,
+    setType,
     loading,
     wordPosition,
     setWordPosition,
@@ -117,7 +217,18 @@ export const WordsProvider: FC = ({ children }) => {
     searchIndexPosition,
     phoneticWord,
     audioPhoneticsWord,
-    notHasLoading
+    notHasLoading,
+    readAllWord,
+    words,
+    currentPage,
+    setCurrentPage,
+    wordHistory,
+    readWordHistory,
+    viewWordHistory,
+    removeWordHistory,
+    resizeScreen,
+    visibleTables,
+    toggleTabMobile,
   };
 
   return (

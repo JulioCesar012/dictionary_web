@@ -8,13 +8,14 @@ export default {
     height: ${({ height }) => height};
     padding: ${space[2]}px ${space[2]}px;
     background: ${({ bg }) => bg};
-    border: 1px solid ${colors["verde-claro"]};
+    border: ${({ br }) => br && `1px solid ${br}`};
     border-radius: 5px;
     color: ${colors["verde-claro"]};
     opacity: ${({ disabled }) => disabled && 0.6};
+    margin-right: ${space[3]}px;
 
-    &:first-child {
-      margin-right: ${space[3]}px;
+    &:last-child {
+      margin-right: 0;
     }
 
     &:active {
@@ -25,6 +26,10 @@ export default {
       text-decoration: none;
       color: ${colors["verde-claro"]};
       background: ${colors["transparent"]};
+    }
+
+    @media only screen and (max-width: 768px) {
+      margin-right: ${space[1]}px;
     }
   `,
 };

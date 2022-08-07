@@ -38,7 +38,7 @@ section {
   padding-top: 100px;
 
   @media only screen and (max-width: 576px) {
-    padding-top: ${space[5]}px;
+    padding-top: ${space[3]}px;
   }
 }
 

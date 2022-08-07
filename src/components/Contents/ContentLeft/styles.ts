@@ -1,14 +1,12 @@
-/* eslint-disable import/no-anonymous-default-export */
 import styled from "styled-components";
 import { colors, space } from "~/styles";
 
 export default {
-  ContainerWordCard: styled.section``,
   TabMobile: styled.button`
-  border: 0;
-  top: 0;
-  margin-bottom: ${space[3]}px;
-  background: ${colors["transparent"]};
+    border: 0;
+    top: 0;
+    margin-bottom: ${space[3]}px;
+    background: ${colors["transparent"]};
   `,
   Card: styled.div<any>`
     &:first-child {
@@ -16,7 +14,7 @@ export default {
     }
 
     @media only screen and (max-width: 576px) {
-      display: ${({ visibleTables }) => visibleTables ? 'none' : 'block'};
+      display: ${({ visibleTables }) => (visibleTables ? "none" : "block")};
       &:first-child {
         margin-top: 0 !important;
       }
@@ -39,15 +37,6 @@ export default {
     text-align: center;
     border-radius: ${space[1]}px;
   `,
-  FavoriteButton: styled.button`
-    border: 0;
-    background: ${colors["transparent"]};
-   
-    svg {
-    position: absolute;
-    }
-
-  `,
   Words: styled.div`
     display: flex;
     flex-direction: column;
@@ -63,18 +52,34 @@ export default {
     margin-bottom: ${space[2]}px;
     font-size: 25px;
   `,
+  AudioContent: styled.div`
+    padding: ${space[4]}px 0;
 
-  WordList: styled.div<any>`
+    margin-top: ${space[5]}px;
+    background-color: ${colors["background/cinza"]};
+
     @media only screen and (max-width: 768px) {
-      display: ${({ visibleTables }) => visibleTables ? 'block' : 'none'};
+      margin-right: 0;
     }
   `,
-  ActionsTable: styled.div`
-    display: flex;
-    margin-bottom: ${space[2]}px;
-  `,
-  ContentLoading: styled.div`
-    text-align: center;
+  ActionsBelow: styled.div`
     margin-top: ${space[6]}px;
+  `,
+  Title: styled.h4``,
+  DescriptionVerb: styled.p`
+    margin-top: ${space[3]}px;
+    color: ${colors["white/neutral-0"]};
+    white-space: pre-wrap;
+  `,
+  ButtonGroup: styled.div`
+    width: 100%;
+    display: flex;
+    padding-right: 25px;
+    margin-top: ${space[4]}px;
+
+    @media only screen and (max-width: 768px) {
+      padding-right: 0;
+      margin-bottom: ${space[5]}px;
+    }
   `,
 };

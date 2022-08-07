@@ -21,6 +21,8 @@ export const colors = {
   "scrollbar-border": "#0D1222",
   "background/cinza": "#808DAD26",
   "background/icon": "#01D29338",
+  "feedback-warning": "#F1AE2F",
+  "feedback-critical-error": "#B71C1C",
   "white/neutral-0": "#FFF",
   "transparent": "transparent",
 };

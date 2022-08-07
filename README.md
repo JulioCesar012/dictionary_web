@@ -1,34 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+    <img alt="WebsitePortifólio" title="#Website Portifólio" src="./public/dictionary.png" width="500px" />
+</h1>
 
-## Getting Started
+<h4 align="center"> 
+	:heavy_check_mark: Dictionary App 🚀 :heavy_check_mark:
+</h4>
+<p align="center">	
+	
+  <a href="https://www.linkedin.com/in/danielobara/">
+    <img alt="Made by DanielObara" src="https://img.shields.io/badge/made%20by-JulioCesar012-%2304D361">
+  </a>
+</p>
+<p align="center">
+</p>
 
-First, run the development server:
+O projeto Dictionary foi feito com Next.js. Ele é um dicionário que lista diversas palavras em inglês e faz uma busca na API do freeDictionaryAPI para retornar o dialeto, audio e outras infos bem legais. 
+
+Nele você pode ouvir audio da palavra, salvar uma como favorita, ver o histórico de ultimas palavras vistas.
+E ele é 100% responsivo.
+
+:rocket: Technologies
+
+O projeto foi desenvolvido utilizando as tecnologias abaixo:
+
+- [Next.js][nextjs]
+- [Typescript][typescript]
+- [Styled Components][styled-components]
+- [Axios][axios]
+- [react H5 Audio Player][reacth5]
+- [Json Server][jsonserver]
+- [Memory Cache][memorycache]
+- [Bootstrap][bootstrap]
+- [React Toastify][react-toastify]
+- [Next Pwa][next-pwa]
+
+:globe_with_meridians: Acesso o projeto clicando [aqui](https://juliofilho.me/).
+
+
+:construction: Como testar:
+
+Clonse a aplicação utilizando o [Git](https://git-scm.com), [Node.js][https://nodejs.org] + [Yarn][https://yarnpkg.com]. Tenha o node e o yarn nas versões mais recentes. Eu usei o Node na V16.15.1.
+
+Rode os seguintes comandos abaixo:
+
+### :gear: Instalar o Front-end dictionary_web
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Clone this repository
+$ git clone https://github.com/JulioCesar012/dictionary_web.git
+
+# Go into the repository
+$ cd dictionary_web
+
+# Install dependencies
+$ yarn
+
+# Rodar em desenvolvimento
+$ yarn dev
+
+# Rodar em modo produção
+$ yarn build
+$ yarn start
+
+# running on port 3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## :desktop_computer: Váriavel ambiente
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Para você poder testar o projeto sem impedimentos ou problemas de conexão eu subi uma api com todas palavras e objetos que a aplicação precisa, não é uma api complexa, mas ela já está hospedada na Vercel, é só adicionar no .env ou .env.local esse váriavel `API_JSON_SERVER` e adicionar a url abaixo e já irá funcionar.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+`API_JSON_SERVER=https://dictionaryapi.vercel.app`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Esse é um desafio da Coodesh `#challenge by coodesh`
 
-## Learn More
+# Rodar a API (backend) local
 
-To learn more about Next.js, take a look at the following resources:
+Caso você não queira usar a api que deixei hospedada na Vercel, poderá baixar o projeto dela aqui no meu git, [nesse link](https://www.linkedin.com/in/julio-cesar-filho-759653171/). Após baixar só entrar na pasta `dictionary_api` e rodar o `yarn`, feito isso, rode o `yarn dev` em ambos projetos e no `dictionary_web` deixe a váriavel `API_JSON_SERVER` vazia. E teste a aplicação.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+:telephone_receiver: Qualquer dúvida estou a disposição.
 
-## Deploy on Vercel
+Made with ♥ by JulioCesar012 :wave: [Get in touch!](https://www.linkedin.com/in/julio-cesar-filho-759653171/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[nextjs]: https://nextjs.org
+[typescript]: https://www.typescriptlang.org
+[styled-components]: https://styled-components.com
+[axios]: https://axios-http.com/ptbr/docs/intro
+[reacth5]: https://www.npmjs.com/package/react-h5-audio-player
+[jsonserver]: https://www.npmjs.com/package/json-server
+[memorycache]: https://www.npmjs.com/package/memory-cache
+[bootstrap]: https://reactstrap.github.io
+[react-toastify]: https://fkhadra.github.io/react-toastify
+[next-pwa]: https://www.npmjs.com/package/next-pwa

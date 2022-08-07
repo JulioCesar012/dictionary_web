@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import styled from "styled-components";
 import { colors, space } from "~/styles";
 
@@ -12,7 +11,8 @@ export default {
   TBody: styled.tbody<any>`
     width: 100%;
     overflow: scroll;
-    height: ${({ loading }) => (loading ? 0 : "100%")};
+    height: ${({ loading, searchIndexPosition }) =>
+      loading ? 0 : searchIndexPosition < 20 ? 'fit-content' : "100%"};
     max-height: calc(100% - 5%);
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -44,14 +44,17 @@ export default {
     }
   `,
   TRBody: styled.tr<any>`
-    background: ${({ active }) =>
-      active ? colors["verde-claro"] : colors["transparent"]};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border: 1px solid #ddd;
     padding: 8px;
 
-    ${({ type }) => (type === "history" || type === "favorites") && `
-      background: ${colors["transparent"]}
-    `}
+    ${({ type }) =>
+      (type === "history" || type === "favorites") &&
+      `
+   background: ${colors["transparent"]}
+ `}
   `,
   TD: styled.td`
     background: ${colors["transparent"]};
@@ -63,5 +66,12 @@ export default {
   `,
   ContentLoading: styled.div`
     margin-top: ${space[2]}px;
+  `,
+  DeleteButton: styled.button`
+    border: 0;
+    background: ${colors["transparent"]};
+  `,
+  ContentFound: styled.div`
+    height: 100%;
   `,
 };

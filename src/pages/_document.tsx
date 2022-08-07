@@ -18,6 +18,13 @@ export default class MyDocument extends Document {
         ...initialProps,
         styles: (
           <>
+            <meta
+              name="viewport"
+              content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+            />
+
+            <link rel="manifest" href="/manifest.json" />
+
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
