@@ -1,7 +1,5 @@
-const withPwa = require("next-pwa");
-
 /** @type {import('next').NextConfig} */
-module.exports = withPwa({
+const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -13,6 +11,7 @@ module.exports = withPwa({
   },
   env: {
     API_JSON_SERVER: process.env.API_JSON_SERVER,
-  },
-  pwa: { dest: "public" },
-});
+  }
+};
+
+module.exports = nextConfig
