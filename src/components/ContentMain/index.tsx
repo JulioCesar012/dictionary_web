@@ -21,7 +21,7 @@ const WordCard = () => {
   useEffect(() => {
     if (deleted) {
       setTimeout(() => {
-        // setType("list");
+        setType("list");
         readAllWord();
       }, 1000);
     }
