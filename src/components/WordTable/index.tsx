@@ -3,10 +3,10 @@ import { Loading } from "~/components/Basics";
 import { useWords } from "~/context";
 import S from "./styles";
 
-const WordTable = ({ words, loading, active }) => {
+const WordTable = ({ words, active }) => {
   const lastRef = useRef(null);
 
-  const { setCurrentPage, type } = useWords();
+  const { setCurrentPage, type, loading } = useWords();
 
   useEffect(() => {
     const options = {

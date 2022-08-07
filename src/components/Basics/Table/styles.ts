@@ -12,7 +12,7 @@ export default {
     width: 100%;
     overflow: scroll;
     height: ${({ loading, searchIndexPosition }) =>
-      loading ? 0 : searchIndexPosition < 20 ? 'fit-content' : "100%"};
+      loading ? 0 : searchIndexPosition < 20 ? "fit-content" : "100%"};
     max-height: calc(100% - 5%);
     display: grid;
     grid-template-columns: repeat(5, 1fr);

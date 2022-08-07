@@ -1,5 +1,3 @@
-import React from "react";
-
 const CardText = ({ width, height, color }) => {
   return (
     <svg

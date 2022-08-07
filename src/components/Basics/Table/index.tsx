@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { NotFound } from "~/components";
 import { useWords, useWordsFavorite } from "~/context";
 import { colors } from "~/styles";
@@ -8,22 +8,17 @@ import { TableProps } from "./data";
 import S from "./styles";
 
 const Table = (props: TableProps) => {
-  const {
-    loading,
-    searchIndexPosition,
-    words,
-    active,
-    type,
-    lastRef,
-    func,
-    viewFunc,
-  } = props;
+  const { searchIndexPosition, words, active, type, func, viewFunc } = props;
 
-  const { readWordHistory } = useWords();
-  const { readWordsFavorite, setDeleted } = useWordsFavorite();
+  const { readAllWord, readWordHistory, loading, setType } = useWords();
+  const {
+    readWordsFavorite,
+    deleted,
+    loading: loadingFavorite,
+  } = useWordsFavorite();
+  const checkValidations = searchIndexPosition > 35;
 
   useLayoutEffect(() => {
-    setDeleted(false);
     if (type === "history") {
       readWordHistory();
     }
@@ -32,6 +27,13 @@ const Table = (props: TableProps) => {
       readWordsFavorite();
     }
   }, []);
+
+  useEffect(() => {
+    if (deleted) {
+      setType("list");
+      readAllWord();
+    }
+  }, [deleted]);
 
   return (
     <S.Table>
@@ -60,14 +62,18 @@ const Table = (props: TableProps) => {
             </S.TRBody>
           ))}
 
-        {(searchIndexPosition > 35 || loading) && (
-          <S.ContentLoading ref={lastRef}>
+        {checkValidations && (
+          <S.ContentLoading>
             <Loading color={"text-success"} />
           </S.ContentLoading>
         )}
       </S.TBody>
 
-      {!words.length && (
+      {(loading || loadingFavorite || deleted) && !checkValidations && (
+        <Loading color={"text-success"} />
+      )}
+
+      {!words.length && !loading && (
         <S.ContentFound>
           <NotFound />
         </S.ContentFound>

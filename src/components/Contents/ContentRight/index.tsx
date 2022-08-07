@@ -8,7 +8,6 @@ const ContentRight = () => {
   const {
     notHasLoading,
     type,
-    loading,
     wordLabel,
     searchIndexPosition,
     words,
@@ -57,18 +56,12 @@ const ContentRight = () => {
         borderColor={`1px solid ${colors["verde-claro"]}`}
       >
         {type === "list" && (
-          <WordTable
-            words={words}
-            loading={loading}
-            active={wordLabel || searchIndexPosition}
-            searchIndexPosition={wordHistory.length}
-          />
+          <WordTable words={words} active={wordLabel || searchIndexPosition} />
         )}
 
         {type === "history" && (
           <Table
             words={wordHistory.map((item) => item)}
-            loading={loading}
             active={wordLabel || searchIndexPosition}
             type={type}
             func={removeWordHistory}
@@ -80,7 +73,6 @@ const ContentRight = () => {
         {type === "favorites" && (
           <Table
             words={wordFavorite.map((item) => item)}
-            loading={loading}
             active={wordLabel || searchIndexPosition}
             type={type}
             func={removeWordFavorite}

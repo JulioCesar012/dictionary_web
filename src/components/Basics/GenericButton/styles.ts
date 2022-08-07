@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import styled from "styled-components";
 import { colors, space } from "~/styles";
 

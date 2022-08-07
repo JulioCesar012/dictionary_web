@@ -3,7 +3,14 @@ import { useWords } from "~/context";
 import { GenericButtonProps } from "./data";
 import S from "./styles";
 
-const GenericButton = ({ title, width, height, bg, br, func }: GenericButtonProps) => {
+const GenericButton = ({
+  title,
+  width,
+  height,
+  bg,
+  br,
+  func,
+}: GenericButtonProps) => {
   const { loading } = useWords();
 
   return (

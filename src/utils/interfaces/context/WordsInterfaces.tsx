@@ -20,7 +20,7 @@ export interface IWordsContext {
   setCurrentPage: any;
   wordHistory: any;
   readWordHistory: () => void;
-  viewWordHistory(label: string): void; 
+  viewWordHistory(label: string): void;
   removeWordHistory(wordId: number): void;
   resizeScreen: any;
   visibleTables: boolean;

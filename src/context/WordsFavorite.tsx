@@ -1,24 +1,29 @@
-import React, { FC, createContext, useContext, useState, useEffect } from "react";
+import React, {
+  FC,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import {
   deleteWordFavorite,
   getWordFavorite,
   IWordsFavoriteContext,
   postWordFavorite,
 } from "~/utils";
-import { useLoading } from "./Loading";
 
 type WordsFavorite = {
   children: React.ReactNode;
-}
+};
 
 export const WordsFavoriteContext = createContext<IWordsFavoriteContext>(
   {} as IWordsFavoriteContext
 );
 
 export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
-  const { setLoading } = useLoading();
   const [wordFavorite, setWordFavorite] = useState([]);
   const [deleted, setDeleted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const allWordsFavorite = wordFavorite.map((item) => item);
 
@@ -44,13 +49,15 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
 
   const removeWordFavorite = (wordId) => {
     setLoading(true);
+    setDeleted(true);
     deleteWordFavorite(wordId).then(({}) => {
-      setDeleted(true);
+      setLoading(false);
     });
-    setDeleted(false);
   };
 
-  useEffect(() => {}, [wordFavorite]);
+  useEffect(() => {
+    setDeleted(false);
+  }, [deleted]);
 
   const value = {
     readWordsFavorite,
@@ -59,6 +66,7 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
     removeWordFavorite,
     deleted,
     setDeleted,
+    loading,
   };
 
   return (

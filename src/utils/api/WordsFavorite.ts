@@ -11,6 +11,6 @@ export const postWordFavorite = async (favorite: string): Promise<any> => {
 };
 
 export const deleteWordFavorite = async (word_id: number): Promise<any> => {
-    const data = await API_JSON_SERVER.delete(`/words_favorite/${word_id}`);
-    return data;
-  }
+  const data = await API_JSON_SERVER.delete(`/words_favorite/${word_id}`);
+  return data;
+};

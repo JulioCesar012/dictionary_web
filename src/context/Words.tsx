@@ -8,17 +8,14 @@ import {
   IWordsContext,
   postWordHistory,
 } from "~/utils";
-import { useLoading } from "./Loading";
 
 type Words = {
   children: React.ReactNode;
-}
+};
 
 export const WordsContext = createContext<IWordsContext>({} as IWordsContext);
 
 export const WordsProvider: FC = ({ children }: Words) => {
-  const { loading, setLoading } = useLoading();
-
   const [mounted, setMounted] = useState(false);
   const [words, setWords] = useState([]);
   const [wordHistory, setWordHistory] = useState([]);
@@ -38,7 +35,9 @@ export const WordsProvider: FC = ({ children }: Words) => {
     typeof window !== "undefined" && window.innerWidth <= 768 ? true : false
   );
 
-  const allWordsHistory = wordHistory.map(item => item);
+  const [loading, setLoading] = useState(true);
+
+  const allWordsHistory = wordHistory.map((item) => item);
 
   const tabToggleType = (text) => {
     setLoading(true);
@@ -46,7 +45,7 @@ export const WordsProvider: FC = ({ children }: Words) => {
     if (type) {
       setTimeout(() => {
         setLoading(false);
-      }, 50);
+      }, 500);
     }
   };
 
@@ -89,9 +88,9 @@ export const WordsProvider: FC = ({ children }: Words) => {
   };
 
   const createWordHistory = (word) => {
-      postWordHistory(word).then(({ data }) => {
-        setWordHistory([...wordHistory, data])
-      });
+    postWordHistory(word).then(({ data }) => {
+      setWordHistory([...wordHistory, data]);
+    });
   };
 
   const readWordHistory = () => {
@@ -119,6 +118,7 @@ export const WordsProvider: FC = ({ children }: Words) => {
   };
 
   const removeWordHistory = (wordId) => {
+    setLoading(true);
     deleteWordHistory(wordId).then((data) => {
       setType("list");
     });
@@ -129,9 +129,12 @@ export const WordsProvider: FC = ({ children }: Words) => {
     setWordPosition(wordPosition + 1);
     setWordLabel(label);
 
-    const checkExisting = allWordsHistory.find(item => item.word_history === label);
+    const checkExisting = allWordsHistory.find(
+      (item) => item.word_history === label
+    );
 
     if (!checkExisting) {
+      setLoading(true);
       createWordHistory(label);
     }
     setError("");
@@ -190,8 +193,6 @@ export const WordsProvider: FC = ({ children }: Words) => {
       readAllWord();
     }
   }, [currentPage]);
-
-  useEffect(() => {}, [wordHistory]);
 
   useEffect(() => {
     window.addEventListener("resize", checkSize);

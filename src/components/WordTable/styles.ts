@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import styled from "styled-components";
 import { colors, space } from "~/styles";
 
@@ -49,7 +48,9 @@ export default {
     border: 1px solid #ddd;
     padding: 8px;
 
-    ${({ type }) => (type === "history" || type === "favorites") && `
+    ${({ type }) =>
+      (type === "history" || type === "favorites") &&
+      `
       background: ${colors["transparent"]}
     `}
   `,

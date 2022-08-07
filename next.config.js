@@ -14,6 +14,5 @@ module.exports = withPwa({
   env: {
     API_JSON_SERVER: process.env.API_JSON_SERVER,
   },
-  pwa: { dest: "public",
-  },
+  pwa: { dest: "public" },
 });

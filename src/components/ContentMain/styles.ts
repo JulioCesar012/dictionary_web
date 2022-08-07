@@ -5,10 +5,10 @@ import { colors, space } from "~/styles";
 export default {
   ContainerWordCard: styled.section``,
   TabMobile: styled.button`
-  border: 0;
-  top: 0;
-  margin-bottom: ${space[3]}px;
-  background: ${colors["transparent"]};
+    border: 0;
+    top: 0;
+    margin-bottom: ${space[3]}px;
+    background: ${colors["transparent"]};
   `,
   Card: styled.div<any>`
     &:first-child {
@@ -16,7 +16,7 @@ export default {
     }
 
     @media only screen and (max-width: 576px) {
-      display: ${({ visibleTables }) => visibleTables ? 'none' : 'block'};
+      display: ${({ visibleTables }) => (visibleTables ? "none" : "block")};
       &:first-child {
         margin-top: 0 !important;
       }
@@ -42,11 +42,10 @@ export default {
   FavoriteButton: styled.button`
     border: 0;
     background: ${colors["transparent"]};
-   
-    svg {
-    position: absolute;
-    }
 
+    svg {
+      position: absolute;
+    }
   `,
   Words: styled.div`
     display: flex;
@@ -66,7 +65,7 @@ export default {
 
   WordList: styled.div<any>`
     @media only screen and (max-width: 768px) {
-      display: ${({ visibleTables }) => visibleTables ? 'block' : 'none'};
+      display: ${({ visibleTables }) => (visibleTables ? "block" : "none")};
     }
   `,
   ActionsTable: styled.div`

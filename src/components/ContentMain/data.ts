@@ -1,3 +1,3 @@
 export interface IContentProps {
-    toggleType?: void;
+  toggleType?: void;
 }
