@@ -7,8 +7,8 @@
 </h4>
 <p align="center">	
 	
-  <a href="https://www.linkedin.com/in/danielobara/">
-    <img alt="Made by DanielObara" src="https://img.shields.io/badge/made%20by-JulioCesar012-%2304D361">
+  <a href="https://www.linkedin.com/in/julio-cesar-filho-759653171">
+    <img alt="Made by JulioCesar012" src="https://img.shields.io/badge/made%20by-JulioCesar012-%2304D361">
   </a>
 </p>
 <p align="center">
