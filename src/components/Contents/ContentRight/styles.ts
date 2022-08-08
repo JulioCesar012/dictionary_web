@@ -20,5 +20,11 @@ export default {
     padding: ${space[1]}px 0 ${space[1]}px ${space[1]}px;
     text-align: center;
     border-radius: ${space[1]}px;
+
+    @media only screen and (max-width: 990px) {
+      overflow-y: scroll;
+      padding-right: ${space[1]}px;
+      margin-bottom: ${space[3]}px;
+    }
   `,
 };
