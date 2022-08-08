@@ -32,7 +32,7 @@ O projeto foi desenvolvido utilizando as tecnologias abaixo:
 - [Memory Cache][memorycache]
 - [Bootstrap][bootstrap]
 - [React Toastify][react-toastify]
-- [Next Pwa][next-pwa]
+- [Use Local Storage State][use-local-storage-state]
 
 :globe_with_meridians: Acesso o projeto clicando [aqui](https://juliofilho.me/).
 
@@ -95,4 +95,4 @@ Made with ♥ by JulioCesar012 :wave: [Get in touch!](https://www.linkedin.com/i
 [memorycache]: https://www.npmjs.com/package/memory-cache
 [bootstrap]: https://reactstrap.github.io
 [react-toastify]: https://fkhadra.github.io/react-toastify
-[next-pwa]: https://www.npmjs.com/package/next-pwa
+[use-local-storage-state]: https://www.npmjs.com/package/use-local-storage-state
