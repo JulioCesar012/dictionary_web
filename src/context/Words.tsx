@@ -1,13 +1,7 @@
 import { FC, createContext, useContext, useState, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
-import {
-  deleteWordHistory,
-  getAllWords,
-  getWord,
-  getWordHistory,
-  IWordsContext,
-  postWordHistory,
-} from "~/utils";
+import { getAllWords, getWord, IWordsContext } from "~/utils";
 
 type Words = {
   children: React.ReactNode;
@@ -19,6 +13,12 @@ export const WordsProvider: FC = ({ children }: Words) => {
   const [mounted, setMounted] = useState(false);
   const [words, setWords] = useState([]);
   const [wordHistory, setWordHistory] = useState([]);
+  const [wordHistoryStr, setWordHistoryStr] = useLocalStorageState(
+    "word_history",
+    { defaultValue: [{ id: null, word_history: null }] }
+  );
+
+  const listStr = wordHistoryStr;
 
   const [wordPosition, setWordPosition] = useState(0);
   const [wordDefinition, setWordDefinition] = useState([]);
@@ -36,8 +36,6 @@ export const WordsProvider: FC = ({ children }: Words) => {
   );
 
   const [loading, setLoading] = useState(true);
-
-  const allWordsHistory = wordHistory.map((item) => item);
 
   const tabToggleType = (text) => {
     setLoading(true);
@@ -88,16 +86,9 @@ export const WordsProvider: FC = ({ children }: Words) => {
   };
 
   const createWordHistory = (word) => {
-    postWordHistory(word).then(({ data }) => {
-      setWordHistory([...wordHistory, data]);
-    });
-  };
-
-  const readWordHistory = () => {
-    getWordHistory().then(({ data }) => {
-      setWordHistory(data);
-      setLoading(false);
-    });
+    const id = wordHistory.length + 1;
+    setWordHistoryStr([...wordHistoryStr, { id: id, word_history: word }]);
+    setWordHistory([...wordHistoryStr, wordHistory]);
   };
 
   const viewWordHistory = (label) => {
@@ -119,9 +110,12 @@ export const WordsProvider: FC = ({ children }: Words) => {
 
   const removeWordHistory = (wordId) => {
     setLoading(true);
-    deleteWordHistory(wordId).then((data) => {
-      setType("list");
+
+    let newWordsHistory = listStr.filter(function (wordLabel) {
+      return wordLabel.id !== wordId;
     });
+    localStorage.setItem("word_history", JSON.stringify(newWordsHistory));
+    setLoading(false);
   };
 
   const goToNextWord = (label) => {
@@ -129,9 +123,7 @@ export const WordsProvider: FC = ({ children }: Words) => {
     setWordPosition(wordPosition + 1);
     setWordLabel(label);
 
-    const checkExisting = allWordsHistory.find(
-      (item) => item.word_history === label
-    );
+    const checkExisting = listStr.find((item) => item.word_history === label);
 
     if (!checkExisting) {
       setLoading(true);
@@ -224,12 +216,12 @@ export const WordsProvider: FC = ({ children }: Words) => {
     currentPage,
     setCurrentPage,
     wordHistory,
-    readWordHistory,
     viewWordHistory,
     removeWordHistory,
     resizeScreen,
     visibleTables,
     toggleTabMobile,
+    listStr,
   };
 
   return (

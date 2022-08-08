@@ -80,6 +80,10 @@ Caso você não queira usar a api que deixei hospedada na Vercel, poderá baixar
 
 :telephone_receiver: Qualquer dúvida estou a disposição.
 
+# OBS: 
+
+eu implementei recurso de salvar histórico e favoritos no localstorage então as apis de salvar histórico e favoritos que estavam sendo usadas agora estão desativadas e usando o storage.
+
 Made with ♥ by JulioCesar012 :wave: [Get in touch!](https://www.linkedin.com/in/julio-cesar-filho-759653171/)
 
 [nextjs]: https://nextjs.org

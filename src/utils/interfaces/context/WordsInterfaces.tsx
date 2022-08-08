@@ -19,10 +19,10 @@ export interface IWordsContext {
   currentPage: number;
   setCurrentPage: any;
   wordHistory: any;
-  readWordHistory: () => void;
   viewWordHistory(label: string): void;
   removeWordHistory(wordId: number): void;
   resizeScreen: any;
   visibleTables: boolean;
   toggleTabMobile: () => void;
+  listStr: any;
 }

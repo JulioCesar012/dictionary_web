@@ -5,12 +5,8 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import {
-  deleteWordFavorite,
-  getWordFavorite,
-  IWordsFavoriteContext,
-  postWordFavorite,
-} from "~/utils";
+import useLocalStorageState from "use-local-storage-state";
+import { getWordFavorite, IWordsFavoriteContext } from "~/utils";
 
 type WordsFavorite = {
   children: React.ReactNode;
@@ -24,8 +20,13 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
   const [wordFavorite, setWordFavorite] = useState([]);
   const [deleted, setDeleted] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const allWordsFavorite = wordFavorite.map((item) => item);
+  const [wordFavoriteStr, setWordFavoriteStr] = useLocalStorageState(
+    "word_favorite",
+    {
+      defaultValue: [{ id: null, word_favorite: null }],
+    }
+  );
+  const allWordsFavoriteStr = wordFavoriteStr;
 
   const readWordsFavorite = () => {
     getWordFavorite().then(({ data }) => {
@@ -34,25 +35,27 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
   };
 
   const addWorsFavorite = (word) => {
-    const checkExisting = allWordsFavorite.find(
-      (item) => item.favorite === word
+    const checkExisting = allWordsFavoriteStr.find(
+      (item) => item.word_favorite === word
     );
 
     if (!checkExisting) {
       setLoading(true);
-      postWordFavorite(word).then(({ data }) => {
-        setWordFavorite([...wordFavorite, data]);
-        setLoading(false);
-      });
+      const id = allWordsFavoriteStr.length + 1;
+      setWordFavoriteStr([...wordFavoriteStr, { id: id, word_favorite: word }]);
+      setWordFavorite([...wordFavoriteStr, wordFavorite]);
+      setLoading(false);
     }
   };
 
   const removeWordFavorite = (wordId) => {
     setLoading(true);
-    setDeleted(true);
-    deleteWordFavorite(wordId).then(({}) => {
-      setLoading(false);
+
+    let newWordsFavorite = allWordsFavoriteStr.filter(function (wordLabel) {
+      return wordLabel.id !== wordId;
     });
+    localStorage.setItem("word_favorite", JSON.stringify(newWordsFavorite));
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -67,6 +70,7 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
     deleted,
     setDeleted,
     loading,
+    wordFavoriteStr,
   };
 
   return (

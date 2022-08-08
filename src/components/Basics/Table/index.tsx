@@ -10,7 +10,7 @@ import S from "./styles";
 const Table = (props: TableProps) => {
   const { searchIndexPosition, words, active, type, func, viewFunc } = props;
 
-  const { readAllWord, readWordHistory, loading, setType } = useWords();
+  const { readAllWord, loading, setType } = useWords();
   const {
     readWordsFavorite,
     deleted,
@@ -19,10 +19,6 @@ const Table = (props: TableProps) => {
   const checkValidations = searchIndexPosition > 35;
 
   useLayoutEffect(() => {
-    if (type === "history") {
-      readWordHistory();
-    }
-
     if (type === "favorites") {
       readWordsFavorite();
     }
@@ -40,26 +36,32 @@ const Table = (props: TableProps) => {
       <S.TBody loading={loading} searchIndexPosition={searchIndexPosition}>
         {!loading &&
           words.map((item, index) => (
-            <S.TRBody
-              key={index}
-              active={active === item}
-              type={type}
-              onClick={() =>
-                viewFunc(item.word_history || item.word || item.favorite)
-              }
-            >
-              <S.TD>{item.word_history || item.favorite}</S.TD>
+            <>
+              {item.id !== null && (
+                <S.TRBody
+                  key={index}
+                  active={active === item}
+                  type={type}
+                  onClick={() =>
+                    viewFunc(
+                      item.word_history || item.word || item.word_favorite
+                    )
+                  }
+                >
+                  <S.TD>{item.word_history || item.word_favorite}</S.TD>
 
-              {type !== "list" && (
-                <S.DeleteButton onClick={() => func(item.id)}>
-                  <DeleteIcon
-                    color={colors["feedback-critical-error"]}
-                    width={25}
-                    height={25}
-                  />
-                </S.DeleteButton>
+                  {type !== "list" && (
+                    <S.DeleteButton onClick={() => func(item.id)}>
+                      <DeleteIcon
+                        color={colors["feedback-critical-error"]}
+                        width={25}
+                        height={25}
+                      />
+                    </S.DeleteButton>
+                  )}
+                </S.TRBody>
               )}
-            </S.TRBody>
+            </>
           ))}
 
         {checkValidations && (

@@ -17,7 +17,7 @@ export default {
     background: ${({ bg }) => bg};
     border: ${({ borderColor }) => borderColor};
     z-index: 3000;
-    padding: 20px;
+    padding: ${space[1]}px 0 ${space[1]}px ${space[1]}px;
     text-align: center;
     border-radius: ${space[1]}px;
   `,

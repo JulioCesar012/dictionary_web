@@ -6,4 +6,5 @@ export interface IWordsFavoriteContext {
   deleted: boolean;
   setDeleted: any;
   loading: boolean;
+  wordFavoriteStr: any;
 }

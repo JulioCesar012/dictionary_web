@@ -15,9 +15,10 @@ const ContentRight = () => {
     visibleTables,
     viewWordHistory,
     removeWordHistory,
+    listStr,
   } = useWords();
 
-  const { removeWordFavorite, wordFavorite } = useWordsFavorite();
+  const { removeWordFavorite, wordFavoriteStr } = useWordsFavorite();
 
   return (
     <S.WordList visibleTables={visibleTables}>
@@ -61,7 +62,7 @@ const ContentRight = () => {
 
         {type === "history" && (
           <Table
-            words={wordHistory.map((item) => item)}
+            words={listStr.map((item) => item)}
             active={wordLabel || searchIndexPosition}
             type={type}
             func={removeWordHistory}
@@ -72,12 +73,12 @@ const ContentRight = () => {
 
         {type === "favorites" && (
           <Table
-            words={wordFavorite.map((item) => item)}
+            words={wordFavoriteStr.map((item) => item)}
             active={wordLabel || searchIndexPosition}
             type={type}
             func={removeWordFavorite}
             viewFunc={viewWordHistory}
-            searchIndexPosition={wordFavorite.length}
+            searchIndexPosition={wordFavoriteStr.length}
           />
         )}
       </S.WordContent>
