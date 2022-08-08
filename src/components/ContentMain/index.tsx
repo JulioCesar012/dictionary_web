@@ -9,6 +9,14 @@ const WordCard = () => {
   const { error, wordDefinition, mounted, setMounted, audioPhoneticsWord } =
     useWords();
 
+  const { wordPosition, readWord, wordLabel } = useWords();
+
+  useEffect(() => {
+    if (wordPosition) {
+      readWord(wordLabel);
+    }
+  }, [wordLabel]);
+
   useEffect(() => setMounted(true), []);
   if (!mounted || !wordDefinition || !audioPhoneticsWord)
     return (

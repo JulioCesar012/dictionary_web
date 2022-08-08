@@ -115,6 +115,7 @@ export const WordsProvider: FC = ({ children }: Words) => {
       return wordLabel.id !== wordId;
     });
     localStorage.setItem("word_history", JSON.stringify(newWordsHistory));
+    setType("list");
     setLoading(false);
   };
 
@@ -153,12 +154,6 @@ export const WordsProvider: FC = ({ children }: Words) => {
     }
   }, [type]);
 
-  useEffect(() => {
-    if (wordPosition) {
-      readWord(wordLabel);
-    }
-  }, [wordLabel]);
-
   const searchIndexPosition = words.find(
     (element, index) => index === wordPosition
   );
@@ -196,15 +191,12 @@ export const WordsProvider: FC = ({ children }: Words) => {
     setType,
     loading,
     wordPosition,
-    setWordPosition,
     goToNextWord,
     goBackToPreviousWord,
     wordLabel,
-    setWordLabel,
     readWord,
     error,
     wordDefinition,
-    setWordDefinition,
     mounted,
     setMounted,
     searchIndexPosition,
@@ -215,7 +207,6 @@ export const WordsProvider: FC = ({ children }: Words) => {
     words,
     currentPage,
     setCurrentPage,
-    wordHistory,
     viewWordHistory,
     removeWordHistory,
     resizeScreen,

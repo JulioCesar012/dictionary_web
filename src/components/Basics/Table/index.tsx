@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { NotFound } from "~/components";
 import { useWords, useWordsFavorite } from "~/context";
 import { colors } from "~/styles";
@@ -11,18 +11,8 @@ const Table = (props: TableProps) => {
   const { searchIndexPosition, words, active, type, func, viewFunc } = props;
 
   const { readAllWord, loading, setType } = useWords();
-  const {
-    readWordsFavorite,
-    deleted,
-    loading: loadingFavorite,
-  } = useWordsFavorite();
+  const { deleted, loading: loadingFavorite } = useWordsFavorite();
   const checkValidations = searchIndexPosition > 35;
-
-  useLayoutEffect(() => {
-    if (type === "favorites") {
-      readWordsFavorite();
-    }
-  }, []);
 
   useEffect(() => {
     if (deleted) {
