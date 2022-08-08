@@ -34,7 +34,7 @@ O projeto foi desenvolvido utilizando as tecnologias abaixo:
 - [React Toastify][react-toastify]
 - [Use Local Storage State][use-local-storage-state]
 
-:globe_with_meridians: Acesso o projeto clicando [aqui](https://juliofilho.me/).
+:globe_with_meridians: Acesso o projeto clicando [aqui](https://dictionaryweb.vercel.app/).
 
 
 :construction: Como testar:
