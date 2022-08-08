@@ -39,6 +39,8 @@ export default {
     }
 
     @media only screen and (max-width: 990px) {
+      max-height: 100%;
+      overflow: hidden;
       grid-template-columns: repeat(2, 1fr);
     }
   `,
