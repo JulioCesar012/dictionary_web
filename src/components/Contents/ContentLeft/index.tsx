@@ -25,7 +25,7 @@ const ContentLeft = () => {
     toggleTabMobile,
   } = useWords();
 
-  const { addWorsFavorite } = useWordsFavorite();
+  const { addWorsFavorite, loading: loadingFavorite } = useWordsFavorite();
 
   return (
     <>
@@ -101,7 +101,7 @@ const ContentLeft = () => {
 
             <GenericButton
               title={
-                loading ? (
+                loading || loadingFavorite ? (
                   <Loading color={"text-warning"} width={20} height={20} />
                 ) : (
                   <StarIcon color={colors["feedback-warning"]} />

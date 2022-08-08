@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { GenericButton, Table } from "~/components/Basics";
 import WordTable from "~/components/WordTable";
 import { useWords, useWordsFavorite } from "~/context";
@@ -11,7 +12,6 @@ const ContentRight = () => {
     wordLabel,
     searchIndexPosition,
     words,
-    wordHistory,
     visibleTables,
     viewWordHistory,
     removeWordHistory,
@@ -19,6 +19,15 @@ const ContentRight = () => {
   } = useWords();
 
   const { removeWordFavorite, wordFavoriteStr } = useWordsFavorite();
+
+  useEffect(() => {
+    if (type === "history") {
+      listStr;
+    }
+    if (type === "favorites") {
+      wordFavoriteStr;
+    }
+  }, [listStr, wordFavoriteStr]);
 
   return (
     <S.WordList visibleTables={visibleTables}>
@@ -67,7 +76,7 @@ const ContentRight = () => {
             type={type}
             func={removeWordHistory}
             viewFunc={viewWordHistory}
-            searchIndexPosition={wordHistory.length}
+            searchIndexPosition={listStr.length}
           />
         )}
 

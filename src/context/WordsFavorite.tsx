@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import { getWordFavorite, IWordsFavoriteContext } from "~/utils";
+import { IWordsFavoriteContext } from "~/utils";
 
 type WordsFavorite = {
   children: React.ReactNode;
@@ -17,7 +17,6 @@ export const WordsFavoriteContext = createContext<IWordsFavoriteContext>(
 );
 
 export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
-  const [wordFavorite, setWordFavorite] = useState([]);
   const [deleted, setDeleted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [wordFavoriteStr, setWordFavoriteStr] = useLocalStorageState(
@@ -28,12 +27,6 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
   );
   const allWordsFavoriteStr = wordFavoriteStr;
 
-  const readWordsFavorite = () => {
-    getWordFavorite().then(({ data }) => {
-      setWordFavorite(data);
-    });
-  };
-
   const addWorsFavorite = (word) => {
     const checkExisting = allWordsFavoriteStr.find(
       (item) => item.word_favorite === word
@@ -43,8 +36,10 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
       setLoading(true);
       const id = allWordsFavoriteStr.length + 1;
       setWordFavoriteStr([...wordFavoriteStr, { id: id, word_favorite: word }]);
-      setWordFavorite([...wordFavoriteStr, wordFavorite]);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 600);
+      return;
     }
   };
 
@@ -55,6 +50,7 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
       return wordLabel.id !== wordId;
     });
     localStorage.setItem("word_favorite", JSON.stringify(newWordsFavorite));
+    setDeleted(true);
     setLoading(false);
   };
 
@@ -63,9 +59,7 @@ export const WordsFavoriteProvider: FC = ({ children }: WordsFavorite) => {
   }, [deleted]);
 
   const value = {
-    readWordsFavorite,
     addWorsFavorite,
-    wordFavorite,
     removeWordFavorite,
     deleted,
     setDeleted,
