@@ -1,9 +1,10 @@
-/* eslint-disable import/no-anonymous-default-export */
 import styled from "styled-components";
 import { colors, space } from "~/styles";
 
 export default {
-  ContainerWordCard: styled.section``,
+  ContainerWordCard: styled.section`
+    margin-bottom: ${space[3]}px;
+  `,
   TabMobile: styled.button`
     border: 0;
     top: 0;
