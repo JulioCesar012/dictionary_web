@@ -27,7 +27,7 @@ const ContentRight = () => {
     if (type === "favorites") {
       wordFavoriteStr;
     }
-  }, [listStr, wordFavoriteStr]);
+  }, [listStr, wordFavoriteStr, type]);
 
   return (
     <S.WordList visibleTables={visibleTables}>
@@ -39,6 +39,8 @@ const ContentRight = () => {
           bg={colors["transparent"]}
           br={colors["verde-claro"]}
           func={() => notHasLoading("list")}
+          active={"list"}
+          typeActive={type}
         />
 
         <GenericButton
@@ -48,6 +50,8 @@ const ContentRight = () => {
           bg={colors["transparent"]}
           br={colors["verde-claro"]}
           func={() => notHasLoading("history")}
+          active={"history"}
+          typeActive={type}
         />
 
         <GenericButton
@@ -57,6 +61,8 @@ const ContentRight = () => {
           bg={colors["transparent"]}
           br={colors["verde-claro"]}
           func={() => notHasLoading("favorites")}
+          active={"favorites"}
+          typeActive={type}
         />
       </S.ActionsTable>
 

@@ -6,7 +6,7 @@ export default {
     width: ${({ width }) => width};
     height: ${({ height }) => height};
     padding: ${space[2]}px ${space[2]}px;
-    background: ${({ bg }) => bg};
+    background: ${({ bg, active, typeActive }) => active === typeActive ? `${colors["verde-escuro"]}` : bg };
     border: ${({ br }) => br && `1px solid ${br}`};
     border-radius: 5px;
     color: ${colors["verde-claro"]};

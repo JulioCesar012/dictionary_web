@@ -23,6 +23,7 @@ export default {
 
     @media only screen and (max-width: 992px) {
       font-size: 1.3rem;
+      margin-top: calc(${space[1]}px + 5px);
     }
   `,
   SlugTitle: styled.span`

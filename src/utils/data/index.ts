@@ -1,1 +1,0 @@
-export { word_list } from "./word_list.json";
