@@ -89,6 +89,7 @@ const ContentLeft = () => {
               bg={colors["transparent"]}
               br={colors["verde-claro"]}
               func={() => goBackToPreviousWord()}
+              active={null}
             />
             <GenericButton
               title="Próximo"
@@ -97,6 +98,7 @@ const ContentLeft = () => {
               bg={colors["transparent"]}
               br={colors["verde-claro"]}
               func={() => goToNextWord(searchIndexPosition)}
+              active={null}
             />
 
             <GenericButton
@@ -112,6 +114,7 @@ const ContentLeft = () => {
               bg={colors["transparent"]}
               br={colors["feedback-warning"]}
               func={() => addWorsFavorite(wordLabel)}
+              active={null}
             />
           </S.ButtonGroup>
         </S.ActionsBelow>

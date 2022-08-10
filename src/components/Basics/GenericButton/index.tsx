@@ -10,6 +10,8 @@ const GenericButton = ({
   bg,
   br,
   func,
+  active,
+  typeActive
 }: GenericButtonProps) => {
   const { loading } = useWords();
 
@@ -22,7 +24,10 @@ const GenericButton = ({
       onClick={func}
       disabled={loading}
       title={title}
+      active={active}
+      typeActive={typeActive}
     >
+      {console.log("active", active === title)}
       <Link href="">{title}</Link>
     </S.ContainerButton>
   );

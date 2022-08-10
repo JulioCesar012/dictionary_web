@@ -5,4 +5,6 @@ export interface GenericButtonProps {
   bg: any;
   br: any;
   func: () => void;
+  active?: string;
+  typeActive?: string;
 }
