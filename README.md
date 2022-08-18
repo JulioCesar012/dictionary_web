@@ -39,7 +39,7 @@ O projeto foi desenvolvido utilizando as tecnologias abaixo:
 
 :construction: Como testar:
 
-Clonse a aplicação utilizando o [Git](https://git-scm.com), [Node.js][https://nodejs.org] + [Yarn][https://yarnpkg.com]. Tenha o node e o yarn nas versões mais recentes. Eu usei o Node na V16.15.1.
+Clone a aplicação utilizando o [Git](https://git-scm.com), [Node.js][https://nodejs.org] + [Yarn][https://yarnpkg.com]. Tenha o node e o yarn nas versões mais recentes. Eu usei o Node na V16.15.1.
 
 Rode os seguintes comandos abaixo:
 
